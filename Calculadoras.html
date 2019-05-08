@@ -1,0 +1,102 @@
+<html>
+
+    <head>
+        <title>Calculadora</title>
+         <link rel="stylesheet" type="text/css" href="teste.css" />
+        <script type="text/javascript">
+            function eqcSegundoGrau() {
+              var r = document.getElementById("r");
+
+              var a = parseFloat(document.getElementById("a").value);
+              var b = parseFloat(document.getElementById("b").value);
+              var c = parseFloat(document.getElementById("c").value);
+
+              var delta = Math.pow(b, 2) - 4 * a * c;
+              if(a === 0) {
+                r.textContent = new Error('A tem que ser diferente de 0');
+              }
+              else if(delta < 0) {
+                r.textContent = "A equação não possui raízes reais";
+              }
+              else if(!delta) {
+                r.textContent = "A equação possui apenas uma raíz real, que é x = " + ((-b) / (2 * a));
+              }
+              else {
+                r.textContent = "A equação possui duas raízes reais, que são x1 = " + (((-b) + Math.pow(delta, 0.5)) / (2 * a)) + ", x2 = " + (((-b) - Math.pow(delta, 0.5)) / (2 * a))
+              }
+            }
+
+            function soma() {
+                
+                var r = document.getElementById("r2");
+
+                var num1 = parseFloat(document.getElementById("num1").value);
+                var num2 = parseFloat(document.getElementById("num2").value);
+                var r2 = document.getElementById("r2");
+
+                r2.textContent = "A soma é: " + (num1 + num2);
+              
+            }
+            
+
+            function div() {
+              var div1 = parseInt(document.getElementById("div1").value);
+              var div2 = parseInt(document.getElementById("div2").value);
+              var r3 = document.getElementById("r3");
+
+              var divisoreNum1 = [];
+              for(var i = div1; i > 0; i--) {
+                if(!(div1 % i)) {
+                  divisoreNum1.push(div1 / i);
+                }
+              }
+
+              var divisoreNum2 = [];
+              for(var i = div2; i > 0; i--) {
+                if(!(div2 % i)) {
+                  divisoreNum2.push(div2 / i);
+                }
+              }
+
+              //var divisoresComuns = [];
+              var resposta = "Os divisores em comum são:";
+              var size = divisoreNum1.length > divisoreNum2.length? divisoreNum1.length : divisoreNum2.length;
+              for(var i = 0; i < size; i++) {
+                for(var j = 0; j < size; j++) {
+                  if(divisoreNum1[j] == divisoreNum2[i]) {
+                    //divisoresComuns.push(divisoreNum1[j]);
+                    resposta = resposta + " " + divisoreNum1[i] + ";";
+                  }
+                }
+              }
+
+              r3.textContent = resposta;
+            }
+        </script>
+
+    
+    </head>
+
+    <body>
+        <h1>Equação do Segundo Grau</h1>
+        <input id="a" type="text" placeholder="a" value="" size="8"/>x<sup>2</sup>
+         + <input id="b" type="text" placeholder="b" value="" size="8"/>x
+         + <input id="c" type="text" placeholder="c" value="" size="8"/>
+        <input type="button" value="calcular" onclick="eqcSegundoGrau()"/>
+        <p id="r"></p>
+        <br>
+
+        <h1>Soma de 2 números</h1>
+            <input id="num1"  type="text" placeholder="Número" value="" size="8"/>
+             + <input id="num2"  type="text" placeholder="Número" value="" size="8"/>
+            <input type="button" value="calcular" onclick="soma()"/>
+        <p id="r2"></p>
+        <br>
+        
+        <h1>Divisores Comuns</h1>
+            <input id="div1"  type="text" placeholder="Número" value="" size="8"/>
+             + <input id="div2"  type="text" placeholder="Número" value="" size="8"/>
+            <input type="button" value="calcular" onclick="div()"/>
+        <p id="r3"></p>
+    </body>
+</html>

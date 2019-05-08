@@ -1,0 +1,97 @@
+<html>
+
+    <head>
+        <title>Grafico</title>
+        <script type="text/javascript">
+        	
+        	function eqcSegundoGrau(x) {
+              var r = document.getElementById("r");
+
+              var a = parseFloat(document.getElementById("a").value);
+              var b = parseFloat(document.getElementById("b").value);
+              var c = parseFloat(document.getElementById("c").value);
+
+              var resposta = (a*x*x) + b*x + c;
+              
+              return resposta;
+            }
+
+		  	function desenha(x, y,r,ctx){
+        		 
+ 				ctx.fillStyle = "rgba(0,0,0,1)"; 
+ 				ctx.beginPath();					 
+		        ctx.arc(x,y,r,0,2*Math.PI);      
+		        ctx.fill();	
+		        ctx.stroke();					
+						
+
+		    }
+
+        	function main(){						
+ 				
+ 				var i = 250;
+ 				var j = 250;
+ 				var k = -250;
+ 				var antx = 0;
+ 				var anty = 0;
+ 				var aux = 0;
+
+ 				var canvas, ctx, w, h;              
+		        w = 500;							
+		        h = 500;							
+		        canvas = document.getElementById("canvas1");
+		        ctx = canvas.getContext("2d");				 
+
+ 				ctx.fillStyle = "rgba(255,255,255,1)"; 
+ 				ctx.beginPath();				 // Limpa os rastros ( para entender melhor tire e rode que vc vai ver)
+			    ctx.rect(0,0,500,500);				 // Cria um retangulp do tamanho da tela
+			    ctx.fill();		
+
+		        ctx.fillStyle = "rgba(0,0,0,1)";
+		        ctx.moveTo(0,250);
+        		ctx.lineTo(500,250);
+        		ctx.stroke();
+
+        		
+		        ctx.moveTo(250,0);
+        		ctx.lineTo(250,500);
+        		ctx.stroke();
+
+        		while( k < 250){
+
+        			fdex = eqcSegundoGrau(k);
+
+        			if(aux == 0){
+        				desenha(k+i,fdex+j,1,ctx);
+        				ctx.moveTo(k+i,fdex+j);
+        				anty = fdex;
+        				antx = k;
+        				aux = 1;
+        			}
+        			else{
+						//ctx.moveTo(antx+i,anty+j);
+	        			ctx.lineTo(k+i,fdex+j);
+		        		ctx.stroke();
+        			}
+
+		        	
+		        	k = k + 1;
+
+		    	
+		    	}  
+		   }
+
+        </script>
+    </head>
+
+    <body>
+    	<p style="font-family: Helvetica">Entre com a equação do segundo grau</p>
+    	 <input id="a" type="text" required='' placeholder="a" value="" size="8"/>x<sup>2</sup>
+         + <input id="b" type="text" required='' placeholder="b" value="" size="8"/>x
+         + <input id="c" type="text" required='' placeholder="c" value="" size="8"/>
+        <input type="button" value="calcular" onclick="main()"/><br><br>
+
+        <canvas id="canvas1" width="500" height="500" style="border:1px black solid;"></canvas> <!-- Serve para criar a area de desenho -->
+    </body>
+
+</html>
