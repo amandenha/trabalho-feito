@@ -25,7 +25,6 @@ function ScoreBoardGameControl (){
 }
 
 function Card(picture){
-	var FOLDER_IMAGES = 'resources/'
 	var IMAGE_QUESTION  = "question.png"
 	this.picture = picture;
 	this.visible = false;
@@ -38,10 +37,10 @@ function Card(picture){
 		return false;
 	}
 	this.getPathCardImage =  function(){
-		return FOLDER_IMAGES+picture;
+		return picture;
 	}
 	this.getQuestionImage =  function(){
-		return FOLDER_IMAGES+IMAGE_QUESTION;
+		return IMAGE_QUESTION;
 	}
 }
 
